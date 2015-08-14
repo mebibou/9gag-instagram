@@ -1,3 +1,7 @@
 .posts-container {
+  text-align: center;
+}
 
+.posts-container .posts-list {
+  list-style: none;
 }

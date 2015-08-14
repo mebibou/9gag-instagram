@@ -19,8 +19,33 @@
 </head>
 <body>
 
-  <div class="container">
-    <%- body %>
+  <div class="contain-to-grid sticky fixed">
+    <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="#">9gag Instagram</a></h1>
+        </li>
+      </ul>
+
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="has-dropdown sort-dropdown">
+            <a href="#">Sort content</a>
+            <ul class="dropdown">
+              <li class="active"><a href="#date">By date</a></li>
+              <li><a href="#likes">By likes</a></li>
+              <li><a href="#comments">By comments</a></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </nav>
+  </div>
+
+  <div class="container row">
+    <div class="large-12 columns">
+      <%- body %>
+    </div>
   </div>
 
   <!-- bower:js -->
@@ -30,6 +55,7 @@
   <script src="../vendor/jquery.cookie/jquery.cookie.js"></script>
   <script src="../vendor/jquery-placeholder/jquery.placeholder.js"></script>
   <script src="../vendor/foundation/js/foundation.js"></script>
+  <script src="../vendor/events-manager/events-manager.min.js"></script>
   <!-- endbower -->
 
   <script src="/features/common/common.js"></script>
