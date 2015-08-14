@@ -15,11 +15,6 @@
         _common = window.GAG.Common;
 
     function _fetch(callback) {
-      console.log('_fetch', {
-        start: _start,
-        sort: _sort
-      });
-
       $.ajax({
         type: 'GET',
         url: _url,

@@ -28,7 +28,7 @@
     };
 
     this.init = function() {
-      _this.sort(_elementSort(_$el.sort.find('li.active a')));
+      _sort = _elementSort(_$el.sort.find('li.active a'));
 
       _$el.sort.find('.dropdown a.sort').mousedown(function() {
         _this.sort(_elementSort($(this)));
@@ -47,7 +47,7 @@
             window.setTimeout;
 
     function _refreshScroll() {
-      _scrollTop = $(window).scrollTop();
+      _scrollTop = $(window).scrollTop() + $(window).height();
     }
     function _refreshMaxHeight() {
       _maxHeight = _$el.container.height();
@@ -68,12 +68,17 @@
       _refreshMaxHeight();
     });
 
-    $(window).scroll(function() {
-      _refreshScroll();
-      if (_maxHeight - _scrollTop < 100) {
-        _infiniteScroll();
-      }
-    });
+    $(window)
+      .on('scroll', function() {
+        _refreshScroll();
+        if (_maxHeight - _scrollTop < 100) {
+          _infiniteScroll();
+        }
+      })
+      .on('resize', function() {
+        _refreshScroll();
+        _refreshMaxHeight();
+      });
 
     _refreshScroll();
     _refreshMaxHeight();
