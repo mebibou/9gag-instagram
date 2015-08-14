@@ -4,7 +4,7 @@
   "description": "9gag instagram code test",
   "main": "index.js",
   "scripts": {
-    "postinstall": "bower install && npm run wiredep",
+    "postinstall": "bower install && npm run wiredep && npm run crawler",
     "start": "node app.js",
     "test": "mocha ./test-mocha/**/*.js",
     "redis": "redis-server",

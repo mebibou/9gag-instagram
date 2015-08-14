@@ -5,10 +5,14 @@
 1. Download and install redis
 2. Open a terminal in the folder and type: `npm install`
 
-## Tests
+This will install the server, the libraries for the frontend and also get data for testing.
 
-`npm test`
+To start the data "crawler" manually, use `npm run crawler`
 
 ## Start the server
 
-`npm start`
+`npm start` and then open a browser on `http://localhost:5000`
+
+## Tests
+
+`npm test`
