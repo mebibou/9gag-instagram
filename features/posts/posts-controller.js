@@ -15,7 +15,7 @@
     var sort = req.param('sort') || 'date',
         start = parseInt(req.param('start'), 10) || 0;
 
-    redisClient.zrange(config.sort[sort], start, start + config.size, function(error, results) {
+    redisClient.zrevrange(config.sort[sort], start, start + config.size, function(error, results) {
       if (error) {
         console.error(error);
         res.send({
