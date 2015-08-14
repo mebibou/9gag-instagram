@@ -17,6 +17,7 @@
   "dependencies": {
     "foundation": "~5.5.2",
     "normalize.css": "~3.0.3",
-    "events-manager": "~1.0.4"
+    "events-manager": "~1.0.4",
+    "moment": "~2.10.6"
   }
 }

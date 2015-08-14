@@ -5,3 +5,31 @@
 .posts-container .posts-list {
   list-style: none;
 }
+
+.posts-container .posts-list video {
+  max-width: 100%;
+  height: auto;
+}
+
+.posts-container .posts-list li {
+  margin: 10px;
+}
+
+.posts-container .posts-list li .post-meta {
+  margin: 5px 15px;
+  text-align: left;
+  color: #999;
+}
+
+.posts-container .posts-list li .post-meta span, .posts-container .posts-list li .post-meta a {
+  font-size: 12px;
+  color: #999;
+}
+.posts-container .posts-list li .post-meta a:hover {
+  text-decoration: underline;
+}
+
+.posts-container .posts-list li .post-meta .timestamp {
+  float: right;
+  margin-top: 4px;
+}

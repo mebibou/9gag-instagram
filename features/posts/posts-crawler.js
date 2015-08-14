@@ -44,7 +44,8 @@
           image: element.images.standard_resolution,
           caption: {
             text: element.caption.text,
-            user: element.caption.from.id
+            link: 'http://instagram.com/' + element.caption.from.username,
+            tag: element.tags[0]
           }
         };
 
