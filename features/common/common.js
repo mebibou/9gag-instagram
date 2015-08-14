@@ -30,7 +30,7 @@
     this.init = function() {
       _this.sort(_elementSort(_$el.sort.find('li.active a')));
 
-      _$el.sort.find('.dropdown a').mousedown(function() {
+      _$el.sort.find('.dropdown a.sort').mousedown(function() {
         _this.sort(_elementSort($(this)));
       });
     };

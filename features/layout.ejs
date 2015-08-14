@@ -23,8 +23,9 @@
     <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
       <ul class="title-area">
         <li class="name">
-          <h1><a href="#">9gag Instagram</a></h1>
+          <h1><a href="#">I9gag</a></h1>
         </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
       </ul>
 
       <section class="top-bar-section">
@@ -32,9 +33,9 @@
           <li class="has-dropdown sort-dropdown">
             <a href="#">Sort content</a>
             <ul class="dropdown">
-              <li class="active"><a href="#date">By date</a></li>
-              <li><a href="#likes">By likes</a></li>
-              <li><a href="#comments">By comments</a></li>
+              <li class="active"><a class="sort" href="#date">By date</a></li>
+              <li><a class="sort" href="#likes">By likes</a></li>
+              <li><a class="sort" href="#comments">By comments</a></li>
             </ul>
           </li>
         </ul>
@@ -58,6 +59,12 @@
   <script src="../vendor/events-manager/events-manager.min.js"></script>
   <script src="../vendor/moment/moment.js"></script>
   <!-- endbower -->
+
+  <script type="text/javascript">
+    (function() {
+      //$(document).foundation();
+    })();
+  </script>
 
   <script src="/features/common/common.js"></script>
   <script src="/features/posts/posts.js"></script>
