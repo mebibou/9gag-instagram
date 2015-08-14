@@ -2,10 +2,8 @@
   'use strict';
 
   var express = require('express'),
-      redisClient = require('../common/common-db.js'),
       router = express.Router(),
-      config = require('./posts-config.js'),
-      unflatten = require('flat').unflatten;
+      PostsService = require('./posts-service.js');
 
   router.get('/', function(req, res) {
     res.render('posts/posts');
@@ -15,30 +13,11 @@
     var sort = req.param('sort') || 'date',
         start = parseInt(req.param('start'), 10) || 0;
 
-    redisClient.zrevrange(config.sort[sort], start, start + config.size, function(error, results) {
-      if (error) {
-        console.error(error);
-        res.send({
-          error: error,
-          posts: []
-        });
-      }
-      else {
-        var multi = redisClient.multi();
-        for (var i = 0; i < results.length; i++) {
-          multi.hgetall(results[i]);
-        }
-        multi.exec(function(err, posts) {
-          posts = posts.map(function(post) {
-            return unflatten(post);
-          });
-
-          res.json({
-            error: null,
-            posts: posts
-          });
-        });
-      }
+    PostsService.search(sort, start, function(error, posts) {
+      res.json({
+        error: error,
+        posts: posts
+      });
     });
   });
 
