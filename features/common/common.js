@@ -12,10 +12,6 @@
           sort: $('.sort-dropdown')
         };
 
-    function _elementSort($element) {
-      return $element.attr('href').substring(1);
-    }
-
     this.sort = function(sort) {
       if (typeof sort != 'undefined') {
         _sort = sort;
@@ -27,12 +23,17 @@
       return _sort;
     };
 
-    this.init = function() {
-      _sort = _elementSort(_$el.sort.find('li.active a'));
+    function _elementSort(hash) {
+      return hash.substring(1);
+    }
 
-      _$el.sort.find('.dropdown a.sort').mousedown(function() {
-        _this.sort(_elementSort($(this)));
-      });
+    this.init = function() {
+      // get sort from existing hash or from default activated element
+      _sort = _elementSort(location.hash) || _elementSort(_$el.sort.find('li.active a').attr('href'));
+
+      window.onhashchange = function() {
+        _this.sort(_elementSort(location.hash));
+      };
     };
 
     // Handle Infinite scroll
