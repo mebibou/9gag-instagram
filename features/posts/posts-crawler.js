@@ -72,11 +72,12 @@
         var result = results[i],
             key = 'post-' + i;
 
-        // for querying
-        multi.zadd([config.sort.like, result.likeCount, key]);
-        multi.zadd([config.sort.comment, result.commentCount, key]);
+        // Add the result in the sorting indexes for querying later
+        multi.zadd([config.sort.likes, result.likeCount, key]);
+        multi.zadd([config.sort.comments, result.commentCount, key]);
         multi.zadd([config.sort.date, result.createdTime, key]);
 
+        // Add the data as a hash (use flatten to store deep object as string values)
         multi.hmset(key, flatten(results[i]));
       }
 
