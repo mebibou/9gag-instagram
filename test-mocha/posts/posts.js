@@ -38,7 +38,7 @@
     it('should sort posts by date', function(done) {
       _get('date', null, function(posts) {
         for (var i = 0; i < posts.length - 1; i++) {
-          expect(_date(posts[i + 1]) > _date(posts[i])).to.be.true;
+          expect(_date(posts[i + 1]) < _date(posts[i])).to.be.true;
         }
 
         done();
@@ -48,7 +48,7 @@
     it('should sort posts by likes', function(done) {
       _get('likes', null, function(posts) {
         for (var i = 0; i < posts.length - 1; i++) {
-          expect(_likes(posts[i + 1]) > _likes(posts[i])).to.be.true;
+          expect(_likes(posts[i + 1]) < _likes(posts[i])).to.be.true;
         }
 
         done();
@@ -58,7 +58,7 @@
     it('should sort posts by comments', function(done) {
       _get('comments', null, function(posts) {
         for (var i = 0; i < posts.length - 1; i++) {
-          expect(_comments(posts[i + 1]) > _comments(posts[i])).to.be.true;
+          expect(_comments(posts[i + 1]) < _comments(posts[i])).to.be.true;
         }
 
         done();
