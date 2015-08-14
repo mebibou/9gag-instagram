@@ -1,0 +1,21 @@
+{
+  "name": "9gag-instagram",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mebibou/9gag-instagram",
+  "authors": [
+    "groyer <guillaumeroyer.mail@gmail.com>"
+  ],
+  "main": "app.js",
+  "license": "GPL-3.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.5.2",
+    "normalize.css": "~3.0.3"
+  }
+}
