@@ -8,6 +8,12 @@
 
 .posts-container .posts-list li {
   margin: 10px;
+  padding: 10px;
+
+  border: 1px solid rgb(125, 125, 125);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  /* slow on webkit, improve performance */
+  box-shadow: none !important;
 }
 
 .posts-container .posts-list li.loading {
