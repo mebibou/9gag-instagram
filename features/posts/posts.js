@@ -5,22 +5,35 @@
     var _url = '/posts/fetch',
         _sort = '',
         _start = 0,
+        _size = 10,
         _$el = {
-          list: $('.posts-list'),
-          imageTemplate: $('#post-image').html(),
-          videoTemplate: $('#post-video').html(),
-          headerTemplate: $('#post-header').html(),
-          footerTemplate: $('#post-footer').html()
+          list: $('.posts-list')
         },
+        _postTemplate = $('#post').html(),
         _common = window.GAG.Common;
 
+    function _addFakePosts() {
+      var $posts = [];
+
+      for (var i = 0; i < _size; i++) {
+        var $post = $(_postTemplate);
+        $posts.push($post);
+        _$el.list.append($post);
+      }
+
+      return $posts;
+    }
+
     function _fetch(callback) {
+      var $posts = _addFakePosts();
+
       $.ajax({
         type: 'GET',
         url: _url,
         data: {
           start: _start,
-          sort: _sort
+          sort: _sort,
+          length: _size
         }
       })
         .success(function(data) {
@@ -28,7 +41,7 @@
             callback(data.posts);
           }
 
-          _addPosts(data.posts);
+          _addPosts($posts, data.posts);
         })
         .error(function() {
           console.error(arguments);
@@ -44,76 +57,69 @@
         .on('sortChanged', function(args) {
           _sort = args.sort;
           _start = 0;
-          _fetch(function() {
             // restart at 0
-            _removePosts();
-          });
+          _removePosts();
+          _fetch();
         })
         .on('infiniteScrollStart', function() {
           _fetch();
         });
     };
 
-    function _getHeader(post) {
-      var $meta = $(_$el.headerTemplate),
+    function _setHeader($post, data) {
+      var $meta = $post.find('.header'),
           $caption = $meta.find('.caption');
 
       $caption.find('a')
-        .text(post.caption.text)
-        .attr('href', post.caption.link + '/#' + post.caption.tag);
-
-      return $meta;
+        .text(data.caption.text)
+        .attr('href', data.caption.link + '/#' + data.caption.tag);
     }
 
-    function _getFooter(post) {
-      var $meta = $(_$el.footerTemplate),
-          createdTime = parseInt(post.createdTime, 10) * 1000;
+    function _setFooter($post, data) {
+      var $meta = $post.find('.footer'),
+          createdTime = parseInt(data.createdTime, 10) * 1000;
 
-      $meta.find('.likes').find('span').text(post.likeCount);
-      $meta.find('.comments').find('span').text(post.commentCount);
+      $meta.find('.likes').find('span').text(data.likeCount);
+      $meta.find('.comments').find('span').text(data.commentCount);
       $meta.find('.timestamp')
-        .attr('href', post.link)
+        .attr('href', data.link)
         .find('span').text(moment(createdTime).fromNow());
-
-      return $meta;
     }
 
-    function _addImagePost(post) {
-      var $post = $(_$el.imageTemplate);
-
-      $post.find('img')
-        .attr('src', post.image.url)
-        .attr('width', post.image.width)
-        .attr('height', post.image.height);
-
-      $post.prepend(_getHeader(post)).append(_getFooter(post));
-      _$el.list.append($post);
+    function _setImagePost($post, data) {
+      $post.find('.replace-content')
+        .replaceWith('<img src="' + data.image.url + '" width="' + data.image.width + '" height="' + data.image.height + '" />');
     }
 
-    function _addVideoPost(post) {
-      var $post = $(_$el.videoTemplate);
-
-      $post.find('video')
-        .attr('src', post.video.url)
-        .attr('width', post.video.width)
-        .attr('height', post.video.height)
-        .attr('poster', post.image.url);
-
-      $post.prepend(_getHeader(post)).append(_getFooter(post));
-      _$el.list.append($post);
+    function _setVideoPost($post, data) {
+      $post.find('.replace-content')
+        .replaceWith('<video controls src="' + data.video.url + '" width="' + data.video.width + '" height="' + data.video.height + '" poster="' + data.image.url + '" />');
     }
 
     function _removePosts() {
       _$el.list.empty();
     }
 
-    function _addPosts(posts) {
-      $.each(posts, function(index, post) {
-        if (post.video) {
-          _addVideoPost(post);
+    function _addPosts($posts, posts) {
+      $.each($posts, function(index, $post) {
+        var post = posts[index];
+        if (post) {
+          _setHeader($post, post);
+          _setFooter($post, post);
+
+          if (post.video) {
+            _setVideoPost($post, post);
+          }
+          else {
+            _setImagePost($post, post);
+          }
+
+          // post is set, display real information
+          $post.removeClass('loading');
         }
+        // no data for this post, remove it
         else {
-          _addImagePost(post);
+          $post.remove();
         }
       });
 
