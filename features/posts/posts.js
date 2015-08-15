@@ -10,7 +10,8 @@
           list: $('.posts-list')
         },
         _postTemplate = $('#post').html(),
-        _common = window.GAG.Common;
+        _common = window.GAG.Common,
+        _virtualized = new window.GAG.VirtualizedList();
 
     function _addFakePosts() {
       var $posts = [];
@@ -59,6 +60,7 @@
           _start = 0;
             // restart at 0
           _removePosts();
+          _virtualized.reset();
           _fetch();
         })
         .on('infiniteScrollStart', function() {
@@ -130,6 +132,8 @@
           $post.remove();
         }
       });
+
+      _virtualized.elements($posts);
 
       _start += posts.length;
 
