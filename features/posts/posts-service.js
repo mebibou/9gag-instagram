@@ -9,8 +9,9 @@
 
   }
 
-  PostsService.prototype.search = function(sort, start, callback) {
-    redisClient.zrevrange(config.sort[sort], start, start + config.size, function(error, results) {
+  PostsService.prototype.search = function(sort, start, length, callback) {
+    var end = start + (length > 0 ? length - 1 : config.size);
+    redisClient.zrevrange(config.sort[sort], start, end, function(error, results) {
       if (error) {
         callback(error);
       }

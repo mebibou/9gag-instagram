@@ -11,12 +11,13 @@
 
   router.get('/fetch', function(req, res) {
     var sort = req.param('sort') || 'date',
-        start = parseInt(req.param('start'), 10) || 0;
+        start = parseInt(req.param('start'), 10) || 0,
+        length = parseInt(req.param('length'), 10) || 0;
 
-    PostsService.search(sort, start, function(error, posts) {
+    PostsService.search(sort, start, length, function(error, posts) {
       res.json({
         error: error,
-        posts: posts
+        posts: posts,
       });
     });
   });

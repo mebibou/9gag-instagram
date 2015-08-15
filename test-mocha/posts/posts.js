@@ -86,5 +86,18 @@
       });
     });
 
+    var size = 20;
+    it('should return ' + size + ' results', function(done) {
+      request(app.server)
+        .get('/posts/fetch?length=' + size)
+        .end(function(err, res) {
+          expect(res.body.error).to.be.null;
+
+          expect(res.body.posts.length).to.be.equals(size);
+
+          done();
+        });
+    });
+
   });
 })();
