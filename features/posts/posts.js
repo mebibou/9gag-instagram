@@ -88,12 +88,20 @@
 
     function _setImagePost($post, data) {
       $post.find('.replace-content')
-        .replaceWith('<img src="' + data.image.url + '" width="' + data.image.width + '" height="' + data.image.height + '" />');
+        .css({
+          width: data.image.width,
+          height: data.image.height
+        })
+        .html('<img src="' + data.image.url + '" width="' + data.image.width + '" height="' + data.image.height + '" />');
     }
 
     function _setVideoPost($post, data) {
       $post.find('.replace-content')
-        .replaceWith('<video controls src="' + data.video.url + '" width="' + data.video.width + '" height="' + data.video.height + '" poster="' + data.image.url + '" />');
+        .css({
+          width: data.video.width,
+          height: data.video.height
+        })
+        .html('<video controls src="' + data.video.url + '" width="' + data.video.width + '" height="' + data.video.height + '" poster="' + data.image.url + '" />');
     }
 
     function _removePosts() {

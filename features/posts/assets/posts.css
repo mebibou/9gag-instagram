@@ -20,7 +20,7 @@
   width: 80%;
 }
 
-.posts-container .posts-list li.loading .header p, .replace-content, .posts-container .posts-list li.loading .footer span, .posts-container .posts-list li.loading .footer a {
+.posts-container .posts-list li.loading .header p, .posts-container .posts-list li.loading .replace-content, .posts-container .posts-list li.loading .footer span, .posts-container .posts-list li.loading .footer a {
   background-color: rgb(125, 125, 125);
   background-color: rgba(125, 125, 125, 0.1);
   color: transparent;
@@ -29,7 +29,7 @@
   font-size: 10px;
 }
 
-.replace-content {
+.posts-container .posts-list li.loading .replace-content {
   height: 300px;
   width: 50%;
   margin: 0 auto;
