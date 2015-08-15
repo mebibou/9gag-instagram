@@ -88,22 +88,32 @@
         .find('span').text(moment(createdTime).fromNow());
     }
 
+    function _setPostDimensions($content, width, height) {
+      $content.width(width);
+      // screen size might be smaller
+      var actualWidth = $content.outerWidth();
+      $content.css({
+        'min-width': actualWidth,
+        'min-height': height / (width / actualWidth)
+      });
+    }
+
     function _setImagePost($post, data) {
-      $post.find('.replace-content')
-        .css({
-          width: data.image.width,
-          height: data.image.height
-        })
+      var $content = $post.find('.replace-content');
+
+      $content
         .html('<img src="' + data.image.url + '" width="' + data.image.width + '" height="' + data.image.height + '" />');
+
+      _setPostDimensions($content, data.image.width, data.image.height);
     }
 
     function _setVideoPost($post, data) {
-      $post.find('.replace-content')
-        .css({
-          width: data.video.width,
-          height: data.video.height
-        })
+      var $content = $post.find('.replace-content');
+
+      $content
         .html('<video controls src="' + data.video.url + '" width="' + data.video.width + '" height="' + data.video.height + '" poster="' + data.image.url + '" />');
+
+      _setPostDimensions($content, data.video.width, data.video.height);
     }
 
     function _removePosts() {

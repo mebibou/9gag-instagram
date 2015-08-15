@@ -16,6 +16,10 @@
   box-shadow: none !important;
 }
 
+.posts-container .posts-list li .replace-content {
+  max-width: 100%;
+}
+
 .posts-container .posts-list li.loading {
   width: 80%;
 }
